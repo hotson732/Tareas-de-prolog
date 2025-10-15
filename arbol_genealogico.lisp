@@ -10,7 +10,7 @@
     
     (Miguel
      (apellidos (Campos Acosta))
-     (altura (Mediano")) 
+     (altura (Mediano)) 
      (complexion (Mediano)) 
      (ojos (Marrones) )
      (cabello (Negro))
@@ -53,13 +53,38 @@
      (color_piel (blanco))
      )
 
-    (Rosa
+    (Jessica
      (apellidos (Campos Hernandez))
      (altura (baja)) 
-     (complexion (llenita)) 
+     (complexion (media)) 
+     (ojos (Marrones)) 
+     (cabello (negro))
+     (color_piel (morena))
+    )
+    (Gael
+     (apellidos (Melgoza Campos))
+     (altura (mediano)) 
+     (complexion (Atletico)) 
      (ojos (Marrones)) 
      (cabello (negro))
      (color_piel (blanco))
     )
+      (Santiago
+     (apellidos (Melgoza Campos))
+     (altura (baja)) 
+     (complexion (mediana)) 
+     (ojos (Marrones)) 
+     (cabello (negro))
+     (color_piel (moreno))
+    )
+      (Eder 
+     (apellidos (Melgoza m))
+     (altura (bajo)) 
+     (complexion (robusto)) 
+     (ojos (Marrones)) 
+     (cabello (negro))
+     (color_piel (blanco))
+    )
+    
     
 ))
