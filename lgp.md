@@ -1,11 +1,53 @@
+<div align="center">
+<img src="./imgs/logos/tec_mexico.png" width="290" height="90" alt="Tec Morelia Logo">
+<img src="./imgs/logos/tec_morelia.png" width="120" alt="Tec Morelia Logo">
 
 
-% Bibliotecas
+---
+
+# INSTITUTO TECNOLÓGICO DE MORELIA  
+
+## BIBLIOTECA Y LIBROS
+
+### Ingeniería en Sistemas Computacionales
+### Programación Lógica y Funcional
+
+
+---
+
+### Integrante | N.C.:
+**Campo Hernández Edson Ángel** | **22120638**
+
+---
+
+**Profesor:** Alcaraz Chavez Jesus Eduardo
+
+---
+
+MORELIA, MICHOACÁN  
+**octubre 2025**
+
+</div>
+
+
+<div>
+
+
+---
+
+# Reporte Completo del Sistema de Biblioteca en Prolog
+
+## 1. Base de Conocimiento
+
+### 1.1 Bibliotecas
+```prolog
 biblioteca(biblioteca_nacional).
 biblioteca(biblioteca_central).
 biblioteca(biblioteca_universitaria).
 
-% Libros
+```
+### 1.2 Libros
+```prolog
 libro('don_quijote_de_la_mancha').
 libro('cien_anos_de_soledad').
 libro('la_vida_es_sueno').
@@ -13,16 +55,20 @@ libro('principia_matematica').
 libro('el_origen_de_las_especies').
 libro('cuentos_infantiles').
 libro('atlas_de_ciencias').
-
-% Autores
+```
+### 1.3 Autores
+```prolog
 autor(cervantes).
 autor(garcia_marquez).
 autor(calderon_de_la_barca).
 autor(newton).
 autor(darwin).
 autor(autor_infantil).
+```
 
-% Relación libro - autor
+## 2. Relaciones Principales
+### 2.1 Relación Libro-Autor
+```prolog
 escrito_por('don_quijote_de_la_mancha', cervantes).
 escrito_por('cien_anos_de_soledad', garcia_marquez).
 escrito_por('la_vida_es_sueno', calderon_de_la_barca).
@@ -30,31 +76,34 @@ escrito_por('principia_matematica', newton).
 escrito_por('el_origen_de_las_especies', darwin).
 escrito_por('cuentos_infantiles', autor_infantil).
 escrito_por('atlas_de_ciencias', newton).
-
-% Relación biblioteca - libro
+```
+### 2.2 Relación Biblioteca-Libro
+```prolog
 tiene(biblioteca_nacional, 'don_quijote_de_la_mancha').
-tiene(biblioteca_nacional, 'cien_anos_de_soledad').
+tiene(biblioteca_nacional, 'cien_anos_de_la_soledad').
 tiene(biblioteca_central, 'principia_matematica').
 tiene(biblioteca_central, 'el_origen_de_las_especies').
 tiene(biblioteca_central, 'don_quijote_de_la_mancha').
 tiene(biblioteca_universitaria, 'atlas_de_ciencias').
 tiene(biblioteca_universitaria, 'cuentos_infantiles').
-
-% Estado de libros
+```
+### 2.3 Estado de Libros
+```prolog
 buen_estado('don_quijote_de_la_mancha').
 buen_estado('principia_matematica').
 buen_estado('cuentos_infantiles').
-% otros no están en buen estado
-
-% Tema de los libros
+```
+### 2.4 Temas de Libros
+```prolog
 tema('principia_matematica', ciencias).
 tema('atlas_de_ciencias', ciencias).
 tema('el_origen_de_las_especies', ciencias).
 tema('don_quijote_de_la_mancha', literatura).
 tema('cien_anos_de_soledad', literatura).
 tema('cuentos_infantiles', infantil).
-
-% Sección de los libros
+```
+### 2.5 Secciones de Libros
+```prolog
 seccion('don_quijote_de_la_mancha', literatura).
 seccion('cien_anos_de_soledad', literatura).
 seccion('la_vida_es_sueno', literatura).
@@ -62,14 +111,17 @@ seccion('principia_matematica', ciencias).
 seccion('atlas_de_ciencias', ciencias).
 seccion('el_origen_de_las_especies', ciencias).
 seccion('cuentos_infantiles', infantil).
-
-% Ejemplares
+```
+## 3. Gestión de Ejemplares y Usuarios
+### 3.1 Ejemplares por Libro
+```prolog
 ejemplares('don_quijote_de_la_mancha', 3).
 ejemplares('cien_anos_de_soledad', 1).
 ejemplares('principia_matematica', 1).
 ejemplares('cuentos_infantiles', 2).
-
-% Usuarios
+```
+### 3.2 Usuario
+```prolog
 usuario(juan).
 usuario(maria).
 usuario(luis).
@@ -79,8 +131,9 @@ usuario_registrado(juan).
 usuario_registrado(maria).
 usuario_registrado(luis).
 usuario_registrado(ana).
-
-% Multas y préstamos
+```
+### 3.3 Multas y Préstamos
+```prolog
 tiene_multa(luis).
 
 prestado_por(juan, 'don_quijote_de_la_mancha').
@@ -95,39 +148,53 @@ prestamos(juan, 2).
 prestamos(maria, 4).
 prestamos(ana, 1).
 prestamos(luis, 0).
-
-
+```
+### 3.4 Páginas por Libro
+```prolog
 paginas('don_quijote_de_la_mancha', 863).
 paginas('cien_anos_de_soledad', 470).
 paginas('cuentos_infantiles', 85).
 paginas('principia_matematica', 350).
 paginas('atlas_de_ciencias', 200).
-
-
-tiene(biblioteca_nacional, 'don_quijote_de_la_mancha').
-
-
+```
+## 4. Reglas y Consultas
+## 4.1 Consultas de Catalogación
+```prolog
 catalogado(Libro) :- tiene(biblioteca_nacional, Libro).
-
-
+```
+### 4.2 Libros en Múltiples Bibliotecas
+```prolog
 esta_en_mas_de_una_biblioteca(Libro) :-
     tiene(Biblio1, Libro),
     tiene(Biblio2, Libro),
     Biblio1 \= Biblio2.
-
-
+```
+### 4.3 Restricciones de Préstamo
+```prolog
 no_puede_prestarse(Libro) :- raro(Libro).
 
+puede_prestarse(Libro) :- buen_estado(Libro).
 
+solo_consulta(Libro) :-
+    libro(Libro),
+    \+ puede_prestarse(Libro).
+```
+### 4.4 Gestión de Cantidades
+```prolog
 cantidad_libros(biblioteca_central, 10000+).
 
-
+libro_con_varios_ejemplares(Libro) :-
+    libro(Libro),
+    ejemplares(Libro, N),
+    N > 1.
+```
+### 4.5 Consultas de Autores
+```prolog
 tiene_libro_en_biblioteca(Autor) :-
     autor(Autor),
     libro(Libro),
     escrito_por(Libro, Autor),
     tiene(_, Libro).
-
 
 autor_con_mas_de_5_libros(Autor) :-
     autor(Autor),
@@ -135,64 +202,80 @@ autor_con_mas_de_5_libros(Autor) :-
     length(Lista, N),
     N > 5.
 
-% 8. No todos los libros de la biblioteca están en buen estado.
+```
+### 4.6 Reglas de Estado
+```prolog
 existe_libro_no_buen_estado :-
     libro(L),
     tiene(_, L),
     \+ buen_estado(L).
-
-% 9. Si un libro está en buen estado, puede ser prestado.
-puede_prestarse(Libro) :- buen_estado(Libro).
-
-% 10. Todos los usuarios registrados pueden tomar prestado un libro.
+```
+### 4.7 Reglas de Usuarios
+```prolog
 puede_prestar(Usuario, Libro) :-
     usuario_registrado(Usuario),
     libro(Libro).
 
-% 11. Existen libros que solo se pueden consultar en la biblioteca.
-solo_consulta(Libro) :-
-    libro(Libro),
-    \+ puede_prestarse(Libro).
-
-% 12. Todo libro prestado debe ser devuelto en 15 días.
-devolver_en(Libro, 15) :- prestado(Libro).
-
-% 13. Hay un libro que nadie ha pedido en préstamo.
-no_solicitado(Libro) :-
-    libro(Libro),
-    \+ prestado(Libro).
-
-% 14. Si un usuario tiene una multa, no puede pedir un libro prestado.
 no_puede_prestar(Usuario) :- tiene_multa(Usuario).
 
-% 15. Todos los libros escritos por un mismo autor están en la misma sección.
+debe_devolver(Usuario) :-
+    prestamos(Usuario, N),
+    N > 3.
+```
+### 4.8 Reglas de Secciones
+```prolog
 misma_seccion(Autor) :-
     escrito_por(L1, Autor),
     escrito_por(L2, Autor),
     seccion(L1, S),
     seccion(L2, S).
 
-libro_con_varios_ejemplares(Libro) :-
-    libro(Libro),
-    ejemplares(Libro, N),
-    N > 1.
-
-debe_devolver(Usuario) :-
-    prestamos(Usuario, N),
-    N > 3.
-
-% 18. Hay una sección de la biblioteca donde todos los libros son de ciencias.
 seccion_ciencias(S) :-
     seccion(_, S),
     forall(seccion(L, S), tema(L, ciencias)).
+```
+### 4.9 Reglas de Préstamos y Devoluciones
+```prolog
+devolver_en(Libro, 15) :- prestado(Libro).
 
-
+no_solicitado(Libro) :-
+    libro(Libro),
+    \+ prestado(Libro).
+```
+### 4.10 Consultas Especiales
+```prolog
 existe_libro_menos_100_paginas :-
     libro(L),
     paginas(L, N),
     N =< 100.
 
-% 20. Existe un usuario que ha tomado prestados todos los libros de la sección infantil.
 usuario_todos_infantil(Usuario) :-
     usuario(Usuario),
     forall((seccion(L, infantil), libro(L)), prestado_por(Usuario, L)).
+```
+## 5. Resumen del Sistema
+### 5.1 Estadísticas
+
+- Bibliotecas: 3
+
+- Libros: 7
+
+- Autores: 6
+
+- Usuarios registrados: 4
+
+- Libros prestados actualmente: 3
+
+
+### 5.2 Características Clave
+- Sistema de gestión de bibliotecas múltiples
+
+- Control de estado de libros
+
+- Gestión de préstamos y multas
+
+- Organización por secciones temáticas
+
+- Control de ejemplares disponibles
+
+- Restricciones de préstamo basadas en estado y multas
