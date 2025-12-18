@@ -1,0 +1,24 @@
+
+diagnostico
+cd /home/hotson/Documentos/Tareas-de-prolog/proyectos_finales
+swipl
+['/home/hotson/Documentos/Tareas-de-prolog/proyectos_finales/diagnostico.pl'].
+ reset_paciente(Edson).
+ reporte(Edson).
+
+akinator
+cd /home/hotson/Documentos/Tareas-de-prolog/proyectos_finales
+swipl
+['/home/hotson/Documentos/Tareas-de-prolog/proyectos_finales/akinator.pl'].
+
+['/home/hotson/Documentos/Tareas-de-prolog/proyectos_finales/sitema_gestor.pl'].
+
+ arbol genealogico
+ cd /home/hotson/Documentos/Tareas-de-prolog
+ swipl
+ ['/home/hotson/Documentos/Tareas-de-prolog/arbol_genealogico.pl'].
+
+
+arbol_genealogico lisp
+clisp
+(load "/home/hotson/Documentos/Tareas-de-prolog/arbol_genealogico.lisp")
